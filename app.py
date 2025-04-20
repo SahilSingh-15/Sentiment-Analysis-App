@@ -56,14 +56,23 @@ def download_model_from_dropbox(dropbox_url):
         return None
 
 def main():
-    # Dropbox link to the model file
-    dropbox_url = 'https://www.dropbox.com/scl/fi/fqbltfd6y3qqxiej7c32v/twitter_sentiment.pkl?rlkey=agbisk8250r179pgbqvuppfrz&st=zhcczrw6&dl=1'
+    # # Dropbox link to the model file
+    # dropbox_url = 'https://www.dropbox.com/scl/fi/fqbltfd6y3qqxiej7c32v/twitter_sentiment.pkl?rlkey=agbisk8250r179pgbqvuppfrz&st=zhcczrw6&dl=1'
     
-    # Load the model from Dropbox
-    model = download_model_from_dropbox(dropbox_url)
+    # # Load the model from Dropbox
+    # model = download_model_from_dropbox(dropbox_url)
 
-    if model is None:
-        st.stop()  # Stop execution if model isn't loaded
+    # if model is None:
+    #     st.stop()  # Stop execution if model isn't loaded
+
+    # Load the model from local file
+    try:
+        with open('twitter_sentiment.pkl', 'rb') as f:
+            model = pickle.load(f)
+    except Exception as e:
+        st.error(f"Error loading the model from local file: {e}")
+        st.stop()
+
 
     st.title("Twitter Sentiment Analysis")
     
